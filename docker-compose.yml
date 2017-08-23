@@ -1,0 +1,76 @@
+version: "2.0"
+services:
+  installer:
+    build: ./docker-images/installer
+    container_name: magento1_installer
+    networks:
+      - custom_magento1
+    environment:
+      MYSQL_HOST: mysql
+      MYSQL_USER: root
+      MYSQL_PASSWORD: pw
+      MAGENTO_ROOT: /var/www/html/web
+    volumes_from:
+      - apache2
+    volumes:
+      - ./config/installer/bin/install.sh:/bin/install.sh
+    links:
+      - "mysql:mysql"
+      - "maildev:maildev"
+    entrypoint: /bin/install.sh
+  apache2:
+    build: ./docker-images/apache2
+    container_name: magento1_apache
+    networks:
+      - custom_magento1
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./config/apache2/ssl-cert-snakeoil.pem:/etc/ssl/certs/ssl-cert-snakeoil.pem
+      - ./config/apache2/ssl-cert-snakeoil.key:/etc/ssl/private/ssl-cert-snakeoil.key
+      - .:/var/www/html
+      - ./config/apache2/sites-enabled/magento1.conf.tmpl:/etc/magento1.conf.tmpl
+      - ./config/apache2/bin/apache.sh:/bin/apache.sh
+      - ./config/apache2/bin/substitute-env-vars.sh:/bin/substitute-env-vars.sh
+    links:
+      - "mysql:mysql"
+      - "maildev:maildev"
+    entrypoint: /bin/apache.sh
+  mysql:
+    image: mysql:5.5
+    container_name: magento1_mysql
+    networks:
+      - custom_magento1
+    ports:
+      - "3307:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: pw
+    volumes:
+      - ./data/mysql:/var/lib/mysql
+      - ./data/dump:/etc/dump
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: magento1_phpmyadmin
+    networks:
+        - custom_magento1
+    ports:
+      - "8081:80"
+    links:
+      - "mysql:mysql"
+    environment:
+      PMA_HOST: "mysql"
+      PMA_PORT: 3306
+  maildev:
+    image: djfarrelly/maildev
+    container_name: magento1_maildev
+    networks:
+        - custom_magento1
+    ports:
+     - 8282:80
+networks:
+    custom_magento1:
+        ipam:
+            driver: default
+            config:
+                - subnet: 172.80.0.0/24
