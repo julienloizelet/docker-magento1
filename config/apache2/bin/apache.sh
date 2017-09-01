@@ -7,22 +7,17 @@ function setApacheVhost(){
     cp -v /etc/magento1.conf /etc/apache2/sites-enabled/magento1.conf;
 }
 
-#####################################
-# A never-ending while loop (which keeps the installer container alive)
-# Arguments:
-#   None
-# Returns:
-#   None
-#####################################
-function runForever() {
-	while :
-	do
-		sleep 1
-	done
+function runApache(){
+if /etc/init.d/apache2 status > /dev/null;
+then echo "Apache already running";
+else exec /usr/sbin/apache2ctl -D FOREGROUND;
+fi
+
+
 }
 
 setApacheVhost
-runForever
+runApache
 exit 0
 
 

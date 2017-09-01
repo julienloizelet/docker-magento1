@@ -32,10 +32,11 @@ services:
       - ./config/apache2/sites-enabled/magento1.conf.tmpl:/etc/magento1.conf.tmpl
       - ./config/apache2/bin/apache.sh:/bin/apache.sh
       - ./config/apache2/bin/substitute-env-vars.sh:/bin/substitute-env-vars.sh
-      - ./config/apache2/sites-enabled/magento1.conf:/etc/apache2/sites-enabled/magento1.conf
+#      - ./config/apache2/sites-enabled/magento1.conf:/etc/apache2/sites-enabled/magento1.conf
     links:
       - "mysql:mysql"
       - "maildev:maildev"
+    entrypoint: /bin/apache.sh
   mysql:
     image: mysql:5.5
     container_name: magento1_mysql
