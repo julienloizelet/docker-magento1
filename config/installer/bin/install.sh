@@ -2,11 +2,6 @@
 
 set -e
 
-function setApacheVhost(){
-    substitute-env-vars.sh /etc /etc/magerun-parameters.tmpl;
-    mkdir -p /bin/project-specifics;
-    cp -v /etc/magerun-parameters /bin/project-specifics/magerun-parameters;
-}
 
 #####################################
 # Print URLs and Logon Information

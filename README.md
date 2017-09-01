@@ -29,8 +29,11 @@ echo "127.0.0.1    yourlocaldomain.local" >> /etc/hosts
 ```
  
 ### Get your sources ready
- We will assume ther are in a directory called `/some/path/for/your-project-sources`.
+ We will assume sources are in a directory called `/some/path/for/your-project-sources`.
  For example, my own is `/home/julien/workspace/name-of-a-project`
+ 
+### Get your database ready
+    Copy a dump `yourdatabasedump.sql` in the path `data/dump`
 
 ## Installation
 
@@ -49,7 +52,7 @@ Once the installation is finished the installer will print the URL and the crede
 
 ```
 ...
-installer_1      | phpMyAdmin: http://yourlocaldomain.local:8080
+installer_1      | phpMyAdmin: http://yourlocaldomain.local:8081
 installer_1      |  - Username: root
 installer_1      |  - Password: pw
 installer_1      |
@@ -58,18 +61,17 @@ installer_1      | Frontend: http://yourlocaldomain.local/
 
 ```
 
-[![Animation: Installation and first project start](documentation/installation-and-first-start-animation.gif)](https://s3.amazonaws.com/andreaskoch/dockerized-magento/installation/Dockerized-Magento-Installation-Linux-no-sound.mp4)
 
 **Note**: The build process and the installation process will take a while if you start the project for the first time. After that, starting and stoping the project will be a matter of seconds.
 
 ## Post Installation
 
 ### Import the database
-1. Create a `dpam` database (a simple way is to use `phpmyadmin` by going to the url : `http://localhost:8081`)
+1. Create a `yourdatabase` database (a simple way is to use `phpmyadmin` by going to the url : `http://localhost:8081`)
 2. We will the import the database with the following commands (use `pw` as root password when prompted.):
 ```sudo ./magento enter mysql
 cd /etc/dump
-mysql -u root -h localhost -p dpam < dpam.sql
+mysql -u root -h localhost -p yourdatabase < dpam.sql
 ```
 ### Modify the `app/etc/local.xml` file
 Go to the `/some/path/for/magento/sources``and edit the `app/etc/local.xml` file with the following content :
