@@ -71,7 +71,7 @@ installer_1      | Frontend: http://yourlocaldomain.local/
 2. We will the import the database with the following commands (use `pw` as root password when prompted.):
 ```sudo ./magento enter mysql
 cd /etc/dump
-mysql -u root -h localhost -p yourdatabase < dpam.sql
+mysql -u root -h localhost -p yourdatabase < yourdatabase.sql
 ```
 ### Modify the `app/etc/local.xml` file
 Go to the `/some/path/for/magento/sources``and edit the `app/etc/local.xml` file with the following content :
@@ -95,7 +95,7 @@ Go to the `/some/path/for/magento/sources``and edit the `app/etc/local.xml` file
                     <host><![CDATA[mysql]]></host>
                     <username><![CDATA[root]]></username>
                     <password><![CDATA[pw]]></password>
-                    <dbname><![CDATA[dpam]]></dbname>
+                    <dbname><![CDATA[yourdatabase]]></dbname>
                     <initStatements><![CDATA[SET NAMES utf8]]></initStatements>
                     <model><![CDATA[mysql4]]></model>
                     <type><![CDATA[pdo_mysql]]></type>
@@ -181,25 +181,17 @@ You can control the project using the built-in `magento`-script which is basical
 The dockerized Magento project consists of the following components:
 
 - **[docker images](docker-images)**
-  1. a [PHP](docker-images/php/Dockerfile) image
-  2. a [Nginx](docker-images/nginx/Dockerfile) web server image
-  3. a standard [MySQL](https://hub.docker.com/_/mysql/) database server image
-  4. multiple instances of the standard [Redis](https://hub.docker.com/_/redis/) docker image
-	5. a standard [phpMyAdmin](https://hub.docker.com/r/phpmyadmin/phpmyadmin/) image that allows you to access the database on port 8080
-  6. and a [Installer](docker-images/installer/Dockerfile) image which contains all tools for installing the project from scratch using an [install script](docker-images/installer/bin/install.sh)
+  1. a [Apache-PHP](docker-images/apache2/Dockerfile) image
+  1. a standard [MySQL](https://hub.docker.com/_/mysql/) database server image
+  1. multiple instances of the standard [Redis](https://hub.docker.com/_/redis/) docker image
+  1. a standard [phpMyAdmin](https://hub.docker.com/r/phpmyadmin/phpmyadmin/) image that allows you to access the database on port 8080
+  1. a Maildev image to prevent sending email on test environnment.
+  1. and a [Installer](docker-images/installer/Dockerfile) image which contains all tools for installing the project from scratch using an [install script](docker-images/installer/bin/install.sh)
 - a **[shell script](magento)** for controlling the project: [`./magento <action>`](magento)
 - a [composer-file](composer.json) for managing the **Magento modules**
 - and the [docker-compose.yml](docker-compose.yml)-file which connects all components
 
-The component-diagram should give you a general idea* how all components of the "dockerized Magento" project are connected:
-
-[![Dockerized Magento: Component Diagram](documentation/dockerized-magento-component-diagram.png)](documentation/dockerized-magento-component-diagram.svg)
-
-`*` The diagram is just an attempt to visualize the dependencies between the different components. You can get the complete picture by studying the docker-compose file:  [docker-compose.yml](docker-compose.yml)
-
-Even though the setup might seem complex, the usage is thanks to docker really easy.
-
-If you are interested in a **guide on how to dockerize a Magento** shop yourself you can have a look at a blog-post of mine: [Dockerizing  Magento](https://andykdocs.de/development/Docker/Dockerize-Magento) on [AndyK Docs](https://andykdocs.de)
+If you are interested in a **guide on how to dockerize a Magento** shop yourself you can have a look at a blog-post of Andreas Koch: [Dockerizing  Magento](https://andykdocs.de/development/Docker/Dockerize-Magento) on [AndyK Docs](https://andykdocs.de)
 
 ## Custom Configuration
 
@@ -219,34 +211,6 @@ I set the default domain name to `yourlocaldomain.local`. To change the domain n
 installer:
   environment:
     DOMAIN: yourlocaldomain.local
-```
-
-### Using a different SSL certificate
-
-By default I chose a dummy certificate ([config/ssl/cert.pem](config/ssl/cert.pem)).
-If you want to use a different certificate you can just override the key and cert with your own certificates.
-
-### Adapt Magento Installation Parameters
-
-If you want to install Magento using your own admin-user or change the password, email-adreess or name you can change the environment variable of the **installer** that begin with `ADMIN_`:
-
-- `ADMIN_USERNAME`: The username of the admin user
-- `ADMIN_FIRSTNAME`: The first name of the admin user
-- `ADMIN_LASTNAME`: The last name of the admin user
-- `ADMIN_PASSWORD`: The password for the admin user
-- `ADMIN_EMAIL`: The email address of the admin user (**Note**: Make sure it has a valid syntax. Otherwise Magento will not install.)
-- `ADMIN_FRONTNAME`: The name of the backend route (e.g. `http://yourlocaldomain.local/admin`)
-
-```yaml
-installer:
-  build: docker-images/installer
-  environment:
-		ADMIN_USERNAME: admin
-		ADMIN_FIRSTNAME: Admin
-		ADMIN_LASTNAME: Inistrator
-		ADMIN_PASSWORD: password123
-		ADMIN_FRONTNAME: admin
-		ADMIN_EMAIL: admin@example.com
 ```
 
 ### Change the MySQL Root User Password
