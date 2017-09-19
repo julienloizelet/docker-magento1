@@ -144,13 +144,6 @@ Go to the `/some/path/for/magento/sources``and edit the `app/etc/local.xml` file
     </global>
 </config>
 ```
-### (Optionnal) Launch the `magerun-setconfig.sh` script.
-```
-sudo ./magento enter installer
-cd /var/www/html/web
-/bin/magerun-setconfig.sh
-```
-
 
 ## Usage
 
