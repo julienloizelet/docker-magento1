@@ -20,6 +20,18 @@ RUN buildDeps=" \
     zip \
     && apt-get purge -y --auto-remove
 
+
+# Install Tools
+RUN apt-get update && \
+    apt-get install -y \
+    vim \
+    nano \
+    telnet \
+    netcat \
+    git-core \
+    zip && \
+    apt-get purge -y --auto-remove
+
 # Installs sendmail
 RUN apt-get update && apt-get install -q -y ssmtp mailutils && rm -rf /var/lib/apt/lists/*
 
@@ -28,6 +40,20 @@ RUN curl -o magerun https://files.magerun.net/n98-magerun.phar && \
     chmod +x ./magerun && \
     cp ./magerun /usr/local/bin/ && \
     rm ./magerun
+
+# Install composer
+RUN curl -sS https://getcomposer.org/installer | php -- --filename=composer --install-dir=/usr/local/bin
+
+# Install modman
+RUN curl -SL https://raw.githubusercontent.com/colinmollenhour/modman/master/modman -o modman \
+    && chmod +x ./modman \
+&& mv ./modman /usr/local/bin/
+
+#Install generate-modman
+RUN curl -sS https://raw.githubusercontent.com/mhauri/generate-modman/master/generate-modman > generate-modman \
+&& chmod +x ./generate-modman \
+&& mv ./generate-modman /usr/local/bin/
+
 
 # set up sendmail config, see http://linux.die.net/man/5/ssmtp.conf for options
 RUN echo "hostname=okaeli.com" > /etc/ssmtp/ssmtp.conf
