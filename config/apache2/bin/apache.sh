@@ -9,15 +9,14 @@ function setApacheVhost(){
 
 function runApache(){
 if /etc/init.d/apache2 status > /dev/null;
-then echo "Apache already running";
+then
+echo "Apache already running";
 else exec /usr/sbin/apache2ctl -D FOREGROUND;
 fi
-
-
 }
 
 setApacheVhost
 runApache
-exit 0
+
 
 

@@ -39,8 +39,8 @@ echo "127.0.0.1    yourlocaldomain.local" >> /etc/hosts
 
 1. Make sure you have docker and docker-compose on your system
 2. Clone the repository `git clone https://github.com/julienloizelet/docker-magento1.git`
-3. Create a  `docker-compose.override.yml` from the example `docker-compose.override.yml.dist` and make the necessary changes. (e.g replace `/some/path/for/your-project-sources` depending on your own.) 
-4. Start the projects using `./magento start` or `docker-compose up`
+3. Create a  `docker-compose.override.yml` from the example `docker-compose.override.yml.dist` and make the necessary changes. (e.g replace `/some/path/for/your-project-sources` depending on your own and remove comments.) 
+4. Start the projects using `./magento start` or `docker-compose up`  (maybe you will have to do a `chmod +x magento`).
 
 During the first start of the project **docker-compose** will
 
