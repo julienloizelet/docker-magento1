@@ -1,5 +1,5 @@
 # Docker for an already existant project on Magento 1.✕
-> Use it to manage a new Magento 1 project with docker and docker-compose.
+> Use it to manage a Magento 1 project with docker and docker-compose.
 By "already existant project On Magento 1.✕", I mean a project based on Magento 1.✕ version (community or enterprise) for which you have sources and database.
 
 Originally forked from [andreaskoch/dockerized-magento](https://github.com/andreaskoch/dockerized-magento).
@@ -230,4 +230,4 @@ branch. Pull requests are warmly welcome.
 If you found any issue, please go [there](https://github.com/julienloizelet/docker-magento1/issues).
 
 ## Licensing
-The code in this project is licensed under MIT license.
+The code in this project is licensed under BSD 3-clause license.
