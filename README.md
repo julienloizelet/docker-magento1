@@ -1,26 +1,27 @@
-# Dockerized - Already Existant Project On Magento 1.✕
-
-A dockerized version for an  "already existant project On Magento 1.✕".
+# Docker for an already existant project on Magento 1.✕
+> Use it to manage a new Magento 1 project with docker and docker-compose.
 By "already existant project On Magento 1.✕", I mean a project based on Magento 1.✕ version (community or enterprise) for which you have sources and database.
 
 Originally forked from [andreaskoch/dockerized-magento](https://github.com/andreaskoch/dockerized-magento).
 
-## Requirements
+
+## Installing / Getting started
+
+### Requirements
 
 If you are on Linux you should install
 
 - [docker](http://docs.docker.com/compose/install/#install-docker) and
-- [docker-compose (formerly known as fig)](http://docs.docker.com/compose/install/#install-compose)
+- [docker-compose](http://docs.docker.com/compose/install/#install-compose)
 
 If you are running on [Mac OS](https://docs.docker.com/engine/installation/mac/) or [Windows](https://docs.docker.com/engine/installation/windows/) you can install the [Docker Toolbox](https://docs.docker.com/engine/installation/mac/) which contains docker, docker-compose and docker-machine.
 
-## Preparations
 
 The web-server will be bound to your local ports 80 and 443. In order to access the shop you must add a hosts file entry for `yourlocaldomain.local`.
 
 ### Add the domain name
 
-For Linux Users, n order to access the shop you must add the domain name "yourlocaldomain.local" to your hosts file (`/etc/hosts`).
+For Linux Users, in order to access the shop you must add the domain name "yourlocaldomain.local" to your hosts file (`/etc/hosts`).
 If you are using docker **natively** you can use this command:
 
 ```bash
@@ -35,12 +36,13 @@ echo "127.0.0.1    yourlocaldomain.local" >> /etc/hosts
 ### Get your database ready
     Copy a dump `yourdatabasedump.sql` in the path `data/dump`
 
-## Installation
+### Installation
 
 1. Make sure you have docker and docker-compose on your system
 2. Clone the repository `git clone https://github.com/julienloizelet/docker-magento1.git`
 3. Create a  `docker-compose.override.yml` from the example `docker-compose.override.yml.dist` and make the necessary changes. (e.g replace `/some/path/for/your-project-sources` depending on your own and remove comments.) 
-4. Start the projects using `./magento start` or `docker-compose up`  (maybe you will have to do a `chmod +x magento`).
+4. If some program are listening to port 80 or 443 (e.g apache or nginx), you must stop them. (`sudo service apache2 stop`)
+5. Start the projects using `sudo ./magento start` (maybe you will have to do a `chmod +x magento`).
 
 During the first start of the project **docker-compose** will
 
@@ -55,6 +57,9 @@ Once the installation is finished the installer will print the URL and the crede
 installer_1      | phpMyAdmin: http://yourlocaldomain.local:8081
 installer_1      |  - Username: root
 installer_1      |  - Password: pw
+installer_1      |
+installer_1      |
+installer_1      | Mail dev: http://yourlocaldomain.local:8282
 installer_1      |
 installer_1      |
 installer_1      | Frontend: http://yourlocaldomain.local/
@@ -193,8 +198,8 @@ All parameters of the Magento installation are defined via environment variables
 If you have started the shop before you must **repeat the installation process** in order to apply changes:
 
 1. Modify the parameters in the `docker-compose.yml`
-2. Shutdown the containers and remove all data (`./magento destroy`)
-3. Start the containers again (`./magento start`)
+2. Shutdown the containers and remove all data (`sudo ./magento destroy`)
+3. Start the containers again (`sudo ./magento start`)
 
 ### Changing the domain name
 
@@ -218,3 +223,11 @@ mysql:
   environment:
     MYSQL_ROOT_PASSWORD: <your-mysql-root-user-password>
 ```
+
+## Contributing
+If you'd like to contribute, please fork the repository and use a feature
+branch. Pull requests are warmly welcome.
+If you found any issue, please go [there](https://github.com/julienloizelet/docker-magento1/issues).
+
+## Licensing
+The code in this project is licensed under MIT license.
