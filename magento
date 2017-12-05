@@ -89,7 +89,7 @@ getContainerNameByType() {
 }
 
 executeMagerun() {
-    local containerType="installer"
+    local containerType="php"
     local containerName=$(getContainerNameByType "$containerType")
     if [ -z "$containerName" ];
     then

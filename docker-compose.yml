@@ -11,31 +11,44 @@ services:
       MYSQL_PASSWORD: pw
       MAGENTO_ROOT: /var/www/html/web
     volumes_from:
-      - apache2
+      - nginx
     volumes:
       - ./config/installer/bin/install.sh:/bin/install.sh
     links:
       - "mysql:mysql"
       - "maildev:maildev"
     entrypoint: /bin/install.sh
-  apache2:
-    build: ./docker-images/apache2
-    container_name: magento1_apache
+  nginx:
+    image: nginx:latest
+    container_name: magento1_nginx
     networks:
       - custom_magento1
     ports:
       - "80:80"
       - "443:443"
     volumes:
-      - ./config/apache2/ssl-cert-snakeoil.pem:/etc/ssl/certs/ssl-cert-snakeoil.pem
-      - ./config/apache2/ssl-cert-snakeoil.key:/etc/ssl/private/ssl-cert-snakeoil.key
-      - ./config/apache2/sites-enabled/magento1.conf.tmpl:/etc/magento1.conf.tmpl
-      - ./config/apache2/bin/apache.sh:/bin/apache.sh
-      - ./config/apache2/bin/substitute-env-vars.sh:/bin/substitute-env-vars.sh
+          - ./logs/nginx:/var/log/nginx
+          - ./config/ssl/cert.pem:/etc/nginx/ssl/cert.pem
+          - ./config/ssl/cert.key:/etc/nginx/ssl/cert.key
+          - ./config/nginx/nginx.conf:/etc/nginx/nginx.conf
+          - ./config/nginx/sites-enabled/default.conf:/etc/nginx/conf.d/default.conf
+          - ./config/nginx/includes:/etc/nginx/includes
+          - ./config/nginx/custom-locations:/etc/nginx/custom-locations
+    volumes_from:
+          - php
     links:
       - "mysql:mysql"
       - "maildev:maildev"
-    entrypoint: /bin/apache.sh
+  php:
+    build: ./docker-images/php
+    container_name: magento1_php
+    networks:
+      - custom_magento1
+    links:
+      - "mysql:mysql"
+      - "maildev:maildev"
+    volumes:
+      - .:/var/www/html
   mysql:
     image: mysql:5.5
     container_name: magento1_mysql

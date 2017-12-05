@@ -7,7 +7,7 @@ services:
       MYSQL_PASSWORD: pw
       DEV_ENV: whateveryouwant
       DEV_EMAIL: youremail@yourdomain.com
-  apache2:
+  php:
     volumes:
       - /some/path/for/your-project-sources/:/var/www/html/web/
 # if you use some composer deployment structure :
@@ -21,3 +21,10 @@ services:
       PHP_IDE_CONFIG: "serverName=magento1.ngrok.io"
       DOMAIN: magento1.local
       DOMAIN_ALIAS: magento1.ngrok.io
+  nginx:
+     environment:
+    # Check your host ip with command like ifconfig
+          XDEBUG_CONFIG: remote_host=10.1.156.27
+          PHP_IDE_CONFIG: "serverName=magento1.ngrok.io"
+          DOMAIN: magento1.local
+          DOMAIN_ALIAS: magento1.ngrok.io

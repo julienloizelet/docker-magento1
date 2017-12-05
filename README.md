@@ -179,14 +179,14 @@ You can control the project using the built-in `magento`-script which is basical
 The dockerized Magento project consists of the following components:
 
 - **[docker images](docker-images)**
-  1. a [Apache-PHP](docker-images/apache2/Dockerfile) image
+  1. a [PHP 5.5](docker-images/php/Dockerfile) image
+  1. a [Nginx]() image
   1. a standard [MySQL](https://hub.docker.com/_/mysql/) database server image
   1. multiple instances of the standard [Redis](https://hub.docker.com/_/redis/) docker image
   1. a standard [phpMyAdmin](https://hub.docker.com/r/phpmyadmin/phpmyadmin/) image that allows you to access the database on port 8080
   1. a Maildev image to prevent sending email on test environnment.
   1. and a [Installer](docker-images/installer/Dockerfile) image which contains all tools for installing the project from scratch using an [install script](docker-images/installer/bin/install.sh)
 - a **[shell script](magento)** for controlling the project: [`./magento <action>`](magento)
-- a [composer-file](composer.json) for managing the **Magento modules**
 - and the [docker-compose.yml](docker-compose.yml)-file which connects all components
 
 If you are interested in a **guide on how to dockerize a Magento** shop yourself you can have a look at a blog-post of Andreas Koch: [Dockerizing  Magento](https://andykdocs.de/development/Docker/Dockerize-Magento) on [AndyK Docs](https://andykdocs.de)
