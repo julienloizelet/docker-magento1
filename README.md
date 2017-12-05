@@ -17,16 +17,16 @@ If you are on Linux you should install
 If you are running on [Mac OS](https://docs.docker.com/engine/installation/mac/) or [Windows](https://docs.docker.com/engine/installation/windows/) you can install the [Docker Toolbox](https://docs.docker.com/engine/installation/mac/) which contains docker, docker-compose and docker-machine.
 
 
-The web-server will be bound to your local ports 80 and 443. In order to access the shop you must add a hosts file entry for `yourlocaldomain.local`.
+The web-server will be bound to your local ports 80 and 443. In order to access the shop you must add a hosts file entry for `magento1.ngrok.io`.
 
 ### Add the domain name
 
-For Linux Users, in order to access the shop you must add the domain name "yourlocaldomain.local" to your hosts file (`/etc/hosts`).
+For Linux Users, in order to access the shop you must add the domain name "magento1.ngrok.io" to your hosts file (`/etc/hosts`).
 If you are using docker **natively** you can use this command:
 
 ```bash
 sudo su
-echo "127.0.0.1    yourlocaldomain.local" >> /etc/hosts
+echo "127.0.0.1    magento1.ngrok.io" >> /etc/hosts
 ```
  
 ### Get your sources ready
@@ -54,15 +54,15 @@ Once the installation is finished the installer will print the URL and the crede
 
 ```
 ...
-installer_1      | phpMyAdmin: http://yourlocaldomain.local:8081
+installer_1      | phpMyAdmin: http://magento1.ngrok.io:8081
 installer_1      |  - Username: root
 installer_1      |  - Password: pw
 installer_1      |
 installer_1      |
-installer_1      | Mail dev: http://yourlocaldomain.local:8282
+installer_1      | Mail dev: http://magento1.ngrok.io:8282
 installer_1      |
 installer_1      |
-installer_1      | Frontend: http://yourlocaldomain.local/
+installer_1      | Frontend: http://magento1.ngrok.io/
 
 ```
 
@@ -203,12 +203,12 @@ If you have started the shop before you must **repeat the installation process**
 
 ### Changing the domain name
 
-I set the default domain name to `yourlocaldomain.local`. To change the domain name replace `yourlocaldomain.local` with `your-domain.tld` in the `docker-compose.yml` file:
+I set the default domain name to `magento1.ngrok.io`. To change the domain name replace `magento1.ngrok.io` with `your-domain.tld` in the `docker-compose.yml` file:
 
 ```yaml
 installer:
   environment:
-    DOMAIN: yourlocaldomain.local
+    DOMAIN: magento1.ngrok.io
 ```
 
 ### Change the MySQL Root User Password
