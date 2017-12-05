@@ -45,10 +45,22 @@ services:
     networks:
       - custom_magento1
     links:
+      - "cache:rediscache"
+      - "sessions:redissession"
       - "mysql:mysql"
       - "maildev:maildev"
     volumes:
       - .:/var/www/html
+  cache:
+    image: redis:latest
+    container_name: magento1_redis_cache
+    networks:
+    - custom_magento1
+  sessions:
+    image: redis:latest
+    container_name: magento1_redis_sessions
+    networks:
+    - custom_magento1
   mysql:
     image: mysql:5.5
     container_name: magento1_mysql
