@@ -42,7 +42,6 @@ services:
       - "mysql:mysql"
       - "maildev:maildev"
     entrypoint: /bin/nginx.sh
-    tty: true
   php:
     build: ./docker-images/php
     container_name: magento1_php
