@@ -13,7 +13,7 @@ services:
     volumes_from:
       - nginx
     volumes:
-      - ./config/installer/bin/install.sh:/bin/install.sh
+      - ./bin/installer/install.sh:/bin/install.sh
     links:
       - "mysql:mysql"
       - "maildev:maildev"
@@ -31,14 +31,18 @@ services:
           - ./config/ssl/cert.pem:/etc/nginx/ssl/cert.pem
           - ./config/ssl/cert.key:/etc/nginx/ssl/cert.key
           - ./config/nginx/nginx.conf:/etc/nginx/nginx.conf
-          - ./config/nginx/sites-enabled/default.conf:/etc/nginx/conf.d/default.conf
+          - ./config/nginx/sites-enabled/default.conf.tmpl:/etc/default.conf.tmpl
           - ./config/nginx/includes:/etc/nginx/includes
           - ./config/nginx/custom-locations:/etc/nginx/custom-locations
+          - ./bin/nginx/nginx.sh:/bin/nginx.sh
+          - ./bin/substitute-env-vars.sh:/bin/substitute-env-vars.sh
     volumes_from:
           - php
     links:
       - "mysql:mysql"
       - "maildev:maildev"
+    entrypoint: /bin/nginx.sh
+    tty: true
   php:
     build: ./docker-images/php
     container_name: magento1_php

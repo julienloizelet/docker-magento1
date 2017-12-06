@@ -51,6 +51,7 @@ function runForever() {
 
 # Fix the www-folder permissions
 chgrp -R 33 /var/www/html
+chgrp -R 33 /bin
 
 # Check if the MAGENTO_ROOT direcotry has been specified
 if [ -z "$MAGENTO_ROOT" ]

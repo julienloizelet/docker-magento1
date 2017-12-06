@@ -1,7 +1,7 @@
 server {
     listen                      80 default_server;
     listen                      443 default_server ssl;
-    server_name                 magento1.ngrok.io;
+    server_name                 ${DOMAIN};
 
     ssl_certificate             /etc/nginx/ssl/cert.pem;
     ssl_certificate_key         /etc/nginx/ssl/cert.key;
