@@ -43,6 +43,7 @@ echo "127.0.0.1    yourdomainname.local" >> /etc/hosts
 3. Create a  `docker-compose.override.yml` from the example `docker-compose.override.yml.dist` and make the necessary changes. (e.g replace `/some/path/for/your-project-sources` depending on your own and remove comments.) 
 4. If some program are listening to port 80 or 443 (e.g apache or nginx), you must stop them. (`sudo service apache2 stop`)
 5. Start the projects using `sudo ./magento start` (maybe you will have to do a `chmod +x magento`).
+6. (optional) If you get error messages like "permission denied", you should run `sudo chmod -R 777 bin` and then rerun  `sudo ./magento start`.
 
 During the first start of the project **docker-compose** will
 
