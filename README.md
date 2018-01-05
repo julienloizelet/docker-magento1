@@ -242,12 +242,12 @@ Workaround : before launch it again : `sudo chmod -R 777 bin`
 
 ## Working with X-debug and Phpstorm
 Here is what I am doing to configure X-debug on Phpstorm (tested on 2016.2.2 version)
-1. First get the IP to put in your `ocker-compose-override.yml` with a `ifconfig` command. (I obtain something like 10.1.156.27).
+1. First get the IP to put in your `docker-compose-override.yml` with a `ifconfig` command. (I obtain something like 10.1.156.27).
 2. Configure Phpstorm :
   - Settings -> Languages and Frameworks -> PHP -> Debug -> Set the port (9000 for me)
   - Project Settings (where are the Magento sources) -> PHP -> Servers : Add server configuration of your site (host = magento1.ngrok.io for me)
   and add the path mapping to `/var/www/html/web/index.php`
-  - Go to Run->Edit configurations. Add "PHP Remote Debug" configuration, select your server (that you just added) and enter an IDE-key : phpstorm-xdebug
+  - Go to Run->Edit configurations. Add "PHP Remote Debug" configuration, select your server (that you just added) and enter an IDE-key : `phpstorm-xdebug`.
   - Select Run->Debug... and select your remote configuration name (as you named it above)
 3. Install and configure a plugin for Firefox : (i use [The easiest Xdebug](https://addons.mozilla.org/en-US/firefox/addon/the-easiest-xdebug/))  
-Go to Tools->Addons->Extensions->The easiest Xdebug and change your IDE-key to selected one
+Go to Tools->Addons->Extensions->The easiest Xdebug and change your IDE-key to selected one : `phpstorm-xdebug`.
