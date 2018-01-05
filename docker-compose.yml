@@ -19,7 +19,7 @@ services:
       - "maildev:maildev"
     entrypoint: /bin/install.sh
   nginx:
-    image: nginx:latest
+    image: nginx:1.11.8
     container_name: magento1_nginx
     networks:
       - custom_magento1
