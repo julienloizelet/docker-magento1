@@ -50,8 +50,8 @@ RUN curl -o magerun https://files.magerun.net/n98-magerun.phar && \
 RUN apt-get update && apt-get install -q -y ssmtp mailutils && rm -rf /var/lib/apt/lists/*
 
 # set up sendmail config, see http://linux.die.net/man/5/ssmtp.conf for options
-RUN echo "hostname=sma.ngrok.io" > /etc/ssmtp/ssmtp.conf
-RUN echo "root=jloizelet@sergent-major.com" >> /etc/ssmtp/ssmtp.conf
+RUN echo "hostname=magento1.ngrok.io" > /etc/ssmtp/ssmtp.conf
+RUN echo "root=julienloizelet@okaeli.com" >> /etc/ssmtp/ssmtp.conf
 RUN echo "mailhub=maildev" >> /etc/ssmtp/ssmtp.conf
 # The above 'maildev' is the name you used for the link command
 # in your docker-compose file or docker link command.
@@ -64,7 +64,7 @@ RUN echo "sendmail_path=sendmail -i -t" >> /usr/local/etc/php/conf.d/php-sendmai
 # Fully qualified domain name configuration for sendmail on localhost.
 # Without this sendmail will not work.
 # This must match the value for 'hostname' field that you set in ssmtp.conf.
-RUN echo "localhost sma.ngrok.io" >> /etc/hosts
+RUN echo "localhost magento1.ngrok.io" >> /etc/hosts
 
 # Configure ERROR REPORT
 COPY php.ini /usr/local/etc/php/php.ini
