@@ -225,6 +225,24 @@ mysql:
     MYSQL_ROOT_PASSWORD: <your-mysql-root-user-password>
 ```
 
+## Working with X-debug and Phpstorm
+Here is what I am doing to configure X-debug on Phpstorm (tested on 2016.2.2 version)
+1. First get the IP to put in your `docker-compose-override.yml` with a `ifconfig` command. (I obtain something like 10.1.156.27).
+2. Install and configure a plugin for Firefox : (i use [The easiest Xdebug](https://addons.mozilla.org/en-US/firefox/addon/the-easiest-xdebug/))  
+   Go to Tools->Addons->Extensions->The easiest Xdebug and change your IDE-key : `phpstorm-xdebug`.
+3. Configure Phpstorm :
+  - Settings -> Languages and Frameworks -> PHP -> Debug -> Set the port (9000 for me)
+  - Project Settings (where are the Magento sources) -> PHP -> Servers : Add server configuration of your site (`host = yourdomainname.local`)
+  and add the path mapping `/some/path/for/your-project-sources` to `/var/www/html/web`
+  - Go to Run->Edit configurations. Add "PHP Remote Debug" configuration, select your server (that you just added) and enter an IDE-key : `phpstorm-xdebug`.
+  - Select Run->Debug... and select your remote configuration name (as you named it above)
+  
+## Troubleshooting
+  
+On first `sudo ./magento start`, you may have an error :
+`for nginx  Cannot start service nginx: oci runtime error: container_linux.go:247: starting container process caused "exec: \"/bin/nginx.sh\": permission denied"`
+Workaround : before launch it again : `sudo chmod -R 777 bin`
+
 ## Contributing
 If you'd like to contribute, please fork the repository and use a feature
 branch. Pull requests are warmly welcome.
@@ -232,22 +250,3 @@ If you found any issue, please go [there](https://github.com/julienloizelet/dock
 
 ## Licensing
 The code in this project is licensed under BSD 3-clause license.
-
-
-## Troubleshooting
-
-On first `sudo ./magento start`, you may have an error :
-`for nginx  Cannot start service nginx: oci runtime error: container_linux.go:247: starting container process caused "exec: \"/bin/nginx.sh\": permission denied"`
-Workaround : before launch it again : `sudo chmod -R 777 bin`
-
-## Working with X-debug and Phpstorm
-Here is what I am doing to configure X-debug on Phpstorm (tested on 2016.2.2 version)
-1. First get the IP to put in your `docker-compose-override.yml` with a `ifconfig` command. (I obtain something like 10.1.156.27).
-2. Configure Phpstorm :
-  - Settings -> Languages and Frameworks -> PHP -> Debug -> Set the port (9000 for me)
-  - Project Settings (where are the Magento sources) -> PHP -> Servers : Add server configuration of your site (host = magento1.ngrok.io for me)
-  and add the path mapping to `/var/www/html/web/index.php`
-  - Go to Run->Edit configurations. Add "PHP Remote Debug" configuration, select your server (that you just added) and enter an IDE-key : `phpstorm-xdebug`.
-  - Select Run->Debug... and select your remote configuration name (as you named it above)
-3. Install and configure a plugin for Firefox : (i use [The easiest Xdebug](https://addons.mozilla.org/en-US/firefox/addon/the-easiest-xdebug/))  
-Go to Tools->Addons->Extensions->The easiest Xdebug and change your IDE-key to selected one : `phpstorm-xdebug`.
