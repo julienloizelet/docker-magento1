@@ -80,7 +80,7 @@ cd /etc/dump
 mysql -u root -h localhost -p yourdatabase < yourdatabase.sql
 ```
 ### Modify the `app/etc/local.xml` file
-Go to the `/some/path/for/magento/sources``and edit the `app/etc/local.xml` file with the following content :
+Go to the `/some/path/for/magento/sources` and edit the `app/etc/local.xml` file with the following content (replace `yourdatabase` name by yours):
 ```
 <?xml version="1.0"?>
 <config>
