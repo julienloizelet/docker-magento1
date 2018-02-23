@@ -239,9 +239,12 @@ Here is what I am doing to configure X-debug on Phpstorm (tested on 2016.2.2 ver
   
 ## Troubleshooting
   
-On first `sudo ./magento start`, you may have an error :
+  - On first `sudo ./magento start`, you may have an error :
 `for nginx  Cannot start service nginx: oci runtime error: container_linux.go:247: starting container process caused "exec: \"/bin/nginx.sh\": permission denied"`
 Workaround : before launch it again : `sudo chmod -R 777 bin`
+  - On first `sudo ./magento start`, you may have an error : `magento1_installer | /bin/install.sh: line ... Text file busy`
+Workaround : `sudo ./magento stop` then `sudo ./magento start`
+  
 
 ## Contributing
 If you'd like to contribute, please fork the repository and use a feature
