@@ -34,7 +34,10 @@ echo "127.0.0.1    yourdomainname.local" >> /etc/hosts
  For example, my own is `/home/julien/workspace/name-of-a-project`
  
 ### Get your database ready
-    Copy a dump `yourdatabasedump.sql` in the path `data/dump`
+   Copy a dump `yourdatabasedump.sql` in the path `data/dump`.
+
+   If you don't have an existent database, you can do a classic Magento installation. For
+   that purpose you should follow the above Installation instructions but skip the Post Installation instructions :do not create the `local.xml` file and go to the url `http://yourdomainname.local` in your favorite browser.
 
 ### Installation
 
