@@ -19,6 +19,7 @@ RUN buildDeps=" \
     mcrypt \
     mysql \
     pdo_mysql \
+    soap \
     zip \
     && apt-get purge -y --auto-remove
 
