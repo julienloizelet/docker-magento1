@@ -52,8 +52,6 @@ services:
       - "sessions:redissession"
       - "mysql:mysql"
       - "maildev:maildev"
-    volumes:
-      - .:/var/www/html
   cache:
     image: redis:latest
     container_name: magento1_redis_cache

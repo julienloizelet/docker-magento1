@@ -2,16 +2,19 @@ FROM php:5.6
 
 # Configure PHP
 RUN buildDeps=" \
-        libpng12-dev \
+        libpng-dev \
         libjpeg-dev \
+        libvpx-dev \
+        libxpm-dev \
         libmcrypt-dev \
         libxml2-dev \
-        freetype* \
+        pkg-config \
+        libfreetype6-dev \
     "; \
     set -x \
     && apt-get update && apt-get install -y $buildDeps --no-install-recommends && rm -rf /var/lib/apt/lists/* \
     && docker-php-ext-configure \
-    gd --with-png-dir=/usr --with-jpeg-dir=/usr --with-freetype-dir \
+    gd --with-png-dir=/usr --with-jpeg-dir=/usr  --with-freetype-dir=/usr/include/freetype  --with-vpx-dir=/usr --with-xpm-dir=/usr \
     && docker-php-ext-install \
     gd \
     mbstring \
