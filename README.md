@@ -246,7 +246,7 @@ If you are using composer with a repo like [mine](https://github.com/julienloize
 You will then be able to run your composer commands once you will be in the `php` container :
 - On a fresh install : run the following commands : 
   - `sudo ./magento start`.
-  - `sudo ./magento enter php`
+  - `sudo ./magento enter php7`
   - `composer install`
 - As the `htdocs` folder is created at this moment, we have to restart container in order to have a functional volume (i.e a link between `htdocs` and `/var/www/html/web`).
 So, just run `sudo ./magento destroy` and then `sudo ./magento start` again.

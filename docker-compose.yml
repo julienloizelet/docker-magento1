@@ -37,14 +37,14 @@ services:
           - ./bin/nginx/nginx.sh:/bin/nginx.sh
           - ./bin/substitute-env-vars.sh:/bin/substitute-env-vars.sh
     volumes_from:
-          - php
+          - php7
     links:
       - "mysql:mysql"
       - "maildev:maildev"
     entrypoint: /bin/nginx.sh
-  php:
-    build: ./docker-images/php
-    container_name: magento1_php
+  php7:
+    build: ./docker-images/php7
+    container_name: magento1_php7
     networks:
       - custom_magento1
     links:

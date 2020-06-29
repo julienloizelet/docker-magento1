@@ -7,7 +7,7 @@ services:
       MYSQL_PASSWORD: pw
       DEV_ENV: whateveryouwant
       DEV_EMAIL: youremail@yourdomain.com
-  php:
+  php7:
     volumes:
       - /some/path/for/your-project-sources/:/var/www/html/web/
 # if you use some composer deployment structure :
