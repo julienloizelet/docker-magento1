@@ -244,9 +244,10 @@ Here is what I am doing to configure X-debug on Phpstorm (tested on 2016.2.2 ver
 
 If you are using composer with a repo like [mine](https://github.com/julienloizelet/composer-magento1.git) (i.e if you are me ...), beware that you have to create the `docker-compose.override.yml` with some specific volumes (see the `docker-compose.override.yml.dist` file).
 You will then be able to run your composer commands once you will be in the `php` container :
-- On a fresh install : run `sudo ./magento start`.
-- `sudo ./magento enter php` then `cd composer`.
-- `composer install`
+- On a fresh install : run the following commands : 
+  - `sudo ./magento start`.
+  - `sudo ./magento enter php`
+  - `composer install`
 - As the `htdocs` folder is created at this moment, we have to restart container in order to have a functional volume (i.e a link between `htdocs` and `/var/www/html/web`).
 So, just run `sudo ./magento destroy` and then `sudo ./magento start` again.
   
