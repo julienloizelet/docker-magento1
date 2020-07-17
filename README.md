@@ -1,4 +1,8 @@
-# Docker for an already existant project on Magento 1.✕
+# DEPRECATED 
+
+> This is no longer supported, please consider using [https://github.com/julienloizelet/docker-openmage](https://github.com/julienloizelet/docker-openmage) instead.
+
+
 > Use it to manage a Magento 1 project with docker and docker-compose.
 By "already existant project On Magento 1.✕", I mean a project based on Magento 1.✕ version (community or enterprise) for which you have sources and database.
 
